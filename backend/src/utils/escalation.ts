@@ -1,9 +1,9 @@
- EscalationRule {
+export interface EscalationRule {
   keyword: string
   priority: string
 }
 
- EscalationResult {
+export interface EscalationResult {
   shouldEscalate: boolean
   priority: string
   matchedKeyword?: string
@@ -24,18 +24,24 @@ const defaultRules: EscalationRule[] = [
   { keyword: 'unacceptable', priority: 'MEDIUM' },
 ]
 
-export function detectEscalation(text: string, customRules: EscalationRule[] = []): EscalationResult {
+export function detectEscalation(
+  text: string,
+  customRules: EscalationRule[] = []
+): EscalationResult {
   const allRules = [...defaultRules, ...customRules]
   const lower = text.toLowerCase()
 
   const priorityOrder = { URGENT: 4, HIGH: 3, MEDIUM: 2, LOW: 1 }
+
   let highestPriority = 0
   let matchedKeyword: string | undefined
   let shouldEscalate = false
 
   for (const rule of allRules) {
     if (lower.includes(rule.keyword.toLowerCase())) {
-      const priority = priorityOrder[rule.priority as keyof typeof priorityOrder] || 2
+      const priority =
+        priorityOrder[rule.priority as keyof typeof priorityOrder] || 2
+
       if (priority > highestPriority) {
         highestPriority = priority
         matchedKeyword = rule.keyword
@@ -45,6 +51,7 @@ export function detectEscalation(text: string, customRules: EscalationRule[] = [
   }
 
   const priorityLabels = ['LOW', 'LOW', 'MEDIUM', 'HIGH', 'URGENT']
+
   return {
     shouldEscalate,
     priority: shouldEscalate ? priorityLabels[highestPriority] : 'LOW',

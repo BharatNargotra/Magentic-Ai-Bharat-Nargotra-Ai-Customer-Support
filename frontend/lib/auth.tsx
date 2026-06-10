@@ -2,10 +2,10 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { api, setAuthToken, clearAuthToken } from './api'
 
-interface User { id: string; name: string; email: string; role: string }
-interface Business { id: string; name: string; slug: string }
+ User { id: string; name: string; email: string; role: string }
+ Business { id: string; name: string; slug: string }
 
-interface AuthContextType {
+ AuthContextType {
   user: User | null
   business: Business | null
   loading: boolean
