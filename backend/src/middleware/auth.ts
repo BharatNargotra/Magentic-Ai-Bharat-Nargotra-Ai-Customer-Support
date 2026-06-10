@@ -8,7 +8,20 @@ export interface JWTPayload {
   role: string
 }
 
-export async function authMiddleware(c: Context, next: Next) {
+type AuthEnv = {
+  Variables: {
+    user: JWTPayload
+  }
+}
+
+type ApiKeyEnv = {
+  Variables: {
+    businessId: string
+    business: any
+  }
+}
+
+export async function authMiddleware(c: Context<AuthEnv>, next: Next) {
   const authHeader = c.req.header('Authorization')
   if (!authHeader?.startsWith('Bearer ')) {
     return c.json({ error: 'Unauthorized' }, 401)
@@ -24,7 +37,7 @@ export async function authMiddleware(c: Context, next: Next) {
   }
 }
 
-export async function apiKeyMiddleware(c: Context, next: Next) {
+export async function apiKeyMiddleware(c: Context<ApiKeyEnv>, next: Next) {
   const apiKey = c.req.header('X-API-Key') || c.req.query('apiKey')
   if (!apiKey) {
     return c.json({ error: 'API key required' }, 401)
@@ -45,7 +58,7 @@ export async function apiKeyMiddleware(c: Context, next: Next) {
 }
 
 export function requireRole(...roles: string[]) {
-  return async (c: Context, next: Next) => {
+  return async (c: Context<AuthEnv>, next: Next) => {
     const user = c.get('user') as JWTPayload
     if (!roles.includes(user.role)) {
       return c.json({ error: 'Forbidden' }, 403)

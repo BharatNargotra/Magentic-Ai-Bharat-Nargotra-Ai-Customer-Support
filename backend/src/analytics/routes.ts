@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { prisma } from '../db/client'
 import { authMiddleware, JWTPayload } from '../middleware/auth'
 
-const analytics = new Hono()
+const analytics = new Hono<{ Variables: { user: JWTPayload } }>()
 analytics.use('*', authMiddleware)
 
 analytics.get('/dashboard', async (c) => {

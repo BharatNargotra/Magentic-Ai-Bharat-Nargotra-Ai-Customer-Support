@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { prisma } from '../db/client'
 import { authMiddleware, JWTPayload } from '../middleware/auth'
 
-const config = new Hono()
+const config = new Hono<{ Variables: { user: JWTPayload } }>()
 config.use('*', authMiddleware)
 
 config.get('/', async (c) => {

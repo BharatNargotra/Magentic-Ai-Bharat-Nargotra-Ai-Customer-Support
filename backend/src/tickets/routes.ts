@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { prisma } from '../db/client'
 import { authMiddleware, JWTPayload } from '../middleware/auth'
 
-const tickets = new Hono()
+const tickets = new Hono<{ Variables: { user: JWTPayload } }>()
 tickets.use('*', authMiddleware)
 
 // List tickets with filters

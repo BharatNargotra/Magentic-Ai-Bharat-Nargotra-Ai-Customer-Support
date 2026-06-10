@@ -4,7 +4,7 @@ import { authMiddleware, JWTPayload } from '../middleware/auth'
 import { embedAndStore } from '../utils/embeddings'
 import { parseDocument } from '../utils/parser'
 
-const knowledge = new Hono()
+const knowledge = new Hono<{ Variables: { user: JWTPayload } }>()
 knowledge.use('*', authMiddleware)
 
 // List documents
