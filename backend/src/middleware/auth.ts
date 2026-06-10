@@ -2,7 +2,7 @@ import { Context, Next } from 'hono'
 import jwt from 'jsonwebtoken'
 import { prisma } from '../db/client'
 
-export  JWTPayload {
+export interface JWTPayload {
   userId: string
   businessId: string
   role: string
