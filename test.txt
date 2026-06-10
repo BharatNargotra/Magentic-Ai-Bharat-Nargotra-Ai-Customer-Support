@@ -1,0 +1,30 @@
+Company: TechCorp Support
+
+PRODUCTS:
+- TechPro X1: Our flagship laptop. Price: $1,299. Warranty: 2 years.
+- TechPro X2: Budget laptop. Price: $799. Warranty: 1 year.
+- TechPad Pro: Tablet. Price: $599. Warranty: 1 year.
+
+REFUND POLICY:
+- 30-day money back guarantee on all products
+- Product must be in original condition
+- Refunds processed within 5-7 business days
+- Contact support@techcorp.com to initiate a refund
+
+SHIPPING:
+- Standard shipping: 5-7 business days, free over $500
+- Express shipping: 2-3 business days, $29.99
+- Overnight shipping: next day, $49.99
+
+SUPPORT HOURS:
+- Monday to Friday: 9am - 6pm EST
+- Saturday: 10am - 4pm EST
+- Sunday: Closed
+- Email: support@techcorp.com
+- Phone: 1-800-TECH-123
+
+COMMON ISSUES:
+- Laptop not charging: Check power adapter, try different outlet
+- Screen flickering: Update display drivers, check display settings
+- Slow performance: Clear cache, check for malware, upgrade RAM
+- WiFi not connecting: Restart router, forget and reconnect network
