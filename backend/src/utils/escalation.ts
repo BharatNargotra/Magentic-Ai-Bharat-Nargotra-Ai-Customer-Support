@@ -1,9 +1,9 @@
-interface EscalationRule {
+ EscalationRule {
   keyword: string
   priority: string
 }
 
-interface EscalationResult {
+ EscalationResult {
   shouldEscalate: boolean
   priority: string
   matchedKeyword?: string

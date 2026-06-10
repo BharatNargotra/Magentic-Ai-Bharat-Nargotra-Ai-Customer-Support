@@ -5,9 +5,13 @@ import { apiKeyMiddleware } from '../middleware/auth'
 import { searchSimilarChunks } from '../utils/embeddings'
 import { detectEscalation } from '../utils/escalation'
 
-const chat = new Hono()
+const chat = new Hono<{ Variables: Variables }>()
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
+type Variables = {
+  businessId: string
+  user?: any
+}
 // Public chat endpoint (used by widget)
 chat.post('/', apiKeyMiddleware, async (c) => {
   const businessId = c.get('businessId') as string
@@ -64,7 +68,7 @@ ${context}`
 
   // Build messages for OpenAI
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-    ...history.map(m => ({
+    ...history.map((m: any) => ({
       role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
       content: m.content,
     })),
