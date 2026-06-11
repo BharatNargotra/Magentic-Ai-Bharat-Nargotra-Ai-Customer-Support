@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/auth'
 import {
   LayoutDashboard, BookOpen, MessageSquare, Ticket,
-  BarChart2, Settings, LogOut, Zap
+  BarChart2, Settings, LogOut, Zap, PlayCircle
 } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -16,6 +16,7 @@ const nav = [
   { href: '/admin/tickets',        label: 'Tickets',        icon: Ticket },
   { href: '/admin/analytics',      label: 'Analytics',      icon: BarChart2 },
   { href: '/admin/settings',       label: 'Settings',       icon: Settings },
+  { href: '/admin/demo',           label: 'Try it',         icon: PlayCircle },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
