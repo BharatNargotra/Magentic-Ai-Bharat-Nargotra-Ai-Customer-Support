@@ -5,7 +5,6 @@ import { api } from '@/lib/api'
 import { Send, Bot, User, RefreshCw, Info } from 'lucide-react'
 import clsx from 'clsx'
 
-const API_KEY = 'sk_demo_fc237f3276f14fd7ba2ebe32b3685dad'
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 
 interface Message {
@@ -20,6 +19,12 @@ export default function DemoPage() {
   const [loading, setLoading] = useState(false)
   const [conversationId, setConversationId] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+
+  const { data: apiKeyData } = useQuery({
+    queryKey: ['api-key'],
+    queryFn: () => api.get('/config/api-key').then(r => r.data),
+  })
+  const API_KEY = apiKeyData?.key || ''
 
   const { data: config } = useQuery({
     queryKey: ['bot-config'],
