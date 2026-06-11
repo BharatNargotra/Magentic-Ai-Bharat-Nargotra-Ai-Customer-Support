@@ -26,7 +26,8 @@ auth.post('/register', async (c) => {
   if (!parsed.success) return c.json({ error: parsed.error.flatten() }, 400)
 
   const { name, email, password, businessName } = parsed.data
-  const slug = businessName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + uuid().slice(0, 6)
+  const slug = businessName
+  //const slug = businessName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + uuid().slice(0, 6)
 
   const existing = await prisma.business.findUnique({ where: { slug } })
   if (existing) return c.json({ error: 'Business already exists' }, 409)
